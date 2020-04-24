@@ -1,0 +1,26 @@
+{
+  "name": "atweb-amazon",
+  "version": "1.0.0",
+  "description": "AT Web for Amazon",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrafdi/atweb-amazon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrafdi/atweb-amazon/issues"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chromedriver": "^81.0",
+    "cucumber": "^6.0.5",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "homepage": "https://github.com/mrafdi/atweb-amazon#readme"
+}
