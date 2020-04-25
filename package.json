@@ -20,7 +20,8 @@
     "chai": "^4.2.0",
     "chromedriver": "^81.0",
     "cucumber": "^6.0.5",
-    "selenium-webdriver": "^4.0.0-alpha.5"
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "dotenv": "^8.2.0"
   },
   "homepage": "https://github.com/mrafdi/atweb-amazon#readme"
 }

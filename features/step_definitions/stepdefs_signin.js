@@ -2,6 +2,7 @@ const { Given, When, Then, AfterAll, setDefaultTimeout } = require('cucumber');
 const { Builder, By, Capabilities, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 const assert = require('assert');
+require('dotenv').config()
 
 require("chromedriver");
 setDefaultTimeout(60 * 1000);
@@ -11,78 +12,58 @@ const capabilities = Capabilities.chrome();
 capabilities.set('chromeOptions', { "w3c": false });
 const driver = new Builder().withCapabilities(capabilities).build();
 
-When(/^I fill the email field with "([^"]*)"$/, async function(email) {
-    await driver.findElement({ css: "input[type='email']"}).sendKeys(email);
-    await driver.sleep(1000);
-});
+// When(/^I fill the email field with valid email$/, async function() {
+//     await driver.findElement({css:"input[name='email']"}).sendKeys(process.env.AMAZON_EMAIL);
+//     await driver.sleep(1000);
+// });
 
-When(/I uncheck the Ingat saya button$/, async function() {
-    await driver.findElement({ css: "span.c-inp__inner-lbl"}).click();
-    (await driver).sleep(1000);
-});
+// When(/^I fill the email field with unregistered email "([^"]*)"$/, async function(email) {
+//     await driver.findElement({css:"input[name='email']"}).sendKeys(email);
+//     await driver.sleep(1000);
+// });
 
-When(/I click Login button on the popup$/, async function() {
-    await driver.sleep(1000);
-    let wording = await driver.findElement({css:"form#new_user_session i.c-btn--spinner__icon~span"}).getText();
-    await assert.ok(wording.includes("Login"));
-    await driver.findElement({ css: "form#new_user_session i.c-btn--spinner__icon"}).click();
-    (await driver).sleep(5000);
-});
+// Then(/I can see error message in Sign in page that the email address not found$/, async function() {
+//     await driver.sleep(2000);
+//     let wordingHead = await driver.findElement({css:"div.a-box-inner h4"}).getText();
+//     let wordingBody = await driver.findElement({css:"div.a-box-inner span.a-list-item"}).getText();
+//     await assert.ok(wordingHead.includes("There was a problem"));
+//     await assert.ok(wordingBody.includes("We cannot find an account with that email address"));
+//     await driver.sleep(3000);
+// });
 
-Then(/I can see my profile image on top right corner$/, async function() {
-    await driver.sleep(2000);
-    await driver.findElement({css:"img.c-avatar__image"});
-    await driver.sleep(3000);
-});
+// When(/I click Continue button on sign in page$/, async function() {
+//     await driver.sleep(1000);
+//     let wording = await driver.findElement({css:"input#continue~span"}).getText();
+//     await assert.ok(wording.includes("Login"));
+//     await driver.findElement({ css: "input#continue"}).click();
+//     (await driver).sleep(3000);
+// });
 
-When(/I click the button labeled "Pesan Sekarang"$/, async function() {
-    await driver.sleep(1000);
-    let wording = await driver.findElement({css:"div.v-card button.icon-left.v-btn span"}).getText();
-    await assert.ok(wording.includes("Order Sekarang"));
-    await driver.findElement({ css: "div.v-card button.icon-left.v-btn"}).click();
-});
+// Then(/I should see the Sign in input password page$/, async function() {
+//     // await driver.sleep(2000);
+//     let wording = await driver.findElement({css:"div.a-row>span"}).getText();
+//     await assert.ok(wording.includes(process.env.AMAZON_EMAIL));
+// });
 
-When(/^I fill out the order detail with name "([^"]*)", address "([^"]*)", location "([^"]*)", and phone "([^"]*)"$/, async function(name, address, location, phone) {
-    await driver.sleep(1000);
-    await driver.findElement({ css: "form div:nth-child(2) div.v-input__slot input"}).sendKeys(name);
-    await driver.findElement({ css: "form div:nth-child(3) div.v-input__slot input"}).sendKeys(address);
-    await driver.findElement({ css: "form div:nth-child(4) div.v-input__slot input"}).sendKeys(location);
-    await driver.sleep(3000); // waiting for the suggestion to appear
-    await driver.findElement({ css: "div.v-list-item"}).click();
-    await driver.findElement({ css: "form div:nth-child(5) div.v-input__slot input"}).sendKeys(phone);
-});
+// When(/^I fill the password field with valid password$/, async function() {
+//     await driver.findElement({ css: "input[type='password']"}).sendKeys(process.env.AMAZON_PASSWORD);
+//     await driver.sleep(1000);
+// });
 
-When(/I click the button labeled "Lanjutkan"$/, async function() {
-    await driver.sleep(1000);
-    let wording = await driver.findElement({css:"div.v-dialog__content.v-dialog__content--active button.icon-left span.v-btn__content"}).getText();
-    await assert.ok(wording.includes("Lanjutkan"));
-    await driver.findElement({ css: "div.v-dialog__content.v-dialog__content--active button.icon-left"}).click();
-});
+// When(/I click Sign In button on Sign in page$/, async function() {
+//     await driver.sleep(1000);
+//     let wording = await driver.findElement({css:"input#signInSubmit~span"}).getText();
+//     await assert.ok(wording.includes("Sign-In"));
+//     await driver.findElement({ css: "input#signInSubmit"}).click();
+//     (await driver).sleep(5000);
+// });
 
-When(/I choose the first delivery option$/, async function() {
-    await driver.sleep(1000);
-    await driver.findElement({ css: "div.v-dialog--active button.mt-4:nth-child(2)"}).click();
-});
-
-When(/I choose the first payment option$/, async function() {
-    await driver.sleep(1000);
-    await driver.findElement({ css: "div.v-dialog--active button.mt-4:nth-child(2)"}).click();
-});
-
-// code below won't be executed because the step is absence in feature file
-// I am not allowed to edit feature file
-When(/I choose the first bank option$/, async function() {
-    await driver.sleep(1000);
-    await driver.findElement({ css: "div.v-dialog--active button.mt-4:nth-child(1)"}).click();
-});
-
-// code below will never run
-Then(/I should see the button labeled "Kirim Foto Bukti Transfer"$/, async function() {
-    await driver.sleep(2000);
-    let wording = await driver.findElement({css:"button.primary span.v-btn__content"}).getText();
-    await assert.ok(wording.includes("Kirim Bukti Transfer"));
-    await driver.sleep(3000);
-});
+// Then(/I can see that I am logged in to my account$/, async function() {
+//     await driver.sleep(2000);
+//     let wording = await (await driver.findElement({css:"#nav-link-accountList .nav-line-1"})).getText();
+//     await assert.ok(wording.includes("Hello, "+process.env.AMAZON_FIRST_NAME));
+//     await driver.sleep(3000);
+// });
 
 // AfterAll('end', async function () {
 //     await driver.quit();
